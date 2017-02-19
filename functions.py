@@ -281,13 +281,13 @@ def identify():
 
 
 
-#accepts id in string format Ex '06'  for 6 id
+#accepts id in 0 - 199
 def delete_id(id):
         r=""
         b=""
         cmd = [0x55,0xAA,0X01,0X00,0x00,0X00,0X00,0X00,0X40,0X00,0X40,0X01]
-        cmd[4] = int(id,16)
-        chk_sum = int('0x55',16) + int('0xAA',16) + int('0x01',16) + int('0x40',16) + int(id,16)
+        cmd[4] = id
+        chk_sum = int('0x55',16) + int('0xAA',16) + int('0x01',16) + int('0x40',16) + id
         high = int(hex(chk_sum >> 8),16)
         low = int(hex(chk_sum & 0xFF),16)
         cmd[10] = low
