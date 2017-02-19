@@ -16,7 +16,7 @@ def start():
                 r = s.read();
                 b = b + r
         res = [c for c in b]
-	if(len(res) == 0):
+	if(len(res) != 12):
 		print "tryagain"
 		return start()
         if res[8].encode("hex") == '30':
@@ -36,7 +36,7 @@ def start_led():
 		r = s.read();
 		b = b + r
 	res = [c for c in b]
-        if(len(res) == 0):
+        if(len(res) =! 12):
                 print "tryagain"
                 return start_led()
 	if res[8].encode("hex") == '30':
@@ -56,7 +56,7 @@ def stop_led():
                 r = s.read();
                 b = b + r
         res = [c for c in b]
-        if(len(res) == 0):
+        if(len(res) != 12):
                 print "tryagain"
                 return stop_led()
         if res[8].encode("hex") == '30':
@@ -76,7 +76,7 @@ def delete_all_ids():
                 r = s.read();
                 b = b + r
         res = [c for c in b]
-        if(len(res) == 0):
+        if(len(res)!= 12):
                 print "tryagain"
                 return delete_all_ids()
         if res[8].encode("hex") == '30':
@@ -97,7 +97,7 @@ def capture_image():
                 r = s.read();
                 b = b + r
 	res = [c for c in b]
-        if(len(res) == 0):
+        if(len(res) != 12):
                 print "tryagain"
                 return capture_image()
 	if res[8].encode("hex") == '30':
@@ -118,7 +118,7 @@ def current_count():
                 r = s.read();
                 b = b + r
         res = [c for c in b]
-        if(len(res) == 0):
+        if(len(res) != 12):
                 print "tryagain"
                 return current_count()
         if res[8].encode("hex") == '30':
@@ -149,7 +149,7 @@ def start_enroll(id):
                 r = s.read();
                 b = b + r
         res = [c for c in b]
-        if(len(res) == 0):
+        if(len(res) != 12):
                 print "tryagain"
                 return start_enroll()
         if res[8].encode("hex") == '30':
@@ -175,7 +175,7 @@ def enroll1():
                 r = s.read();
                 b = b + r
         res = [c for c in b]
-        if(len(res) == 0):
+        if(len(res) != 12):
                 print "tryagain"
                 return enroll1()
         if res[8].encode("hex") == '30':
@@ -204,7 +204,7 @@ def enroll2():
                 r = s.read();
                 b = b + r
         res = [c for c in b]
-        if(len(res) == 0):
+        if(len(res) != 12):
                 print "tryagain"
                 return enroll2()
         if res[8].encode("hex") == '30':
@@ -233,7 +233,7 @@ def enroll3():
                 r = s.read();
                 b = b + r
         res = [c for c in b]
-        if(len(res) == 0):
+        if(len(res) != 12):
                 print "tryagain"
                 return enroll3()
         if res[8].encode("hex") == '30':
@@ -263,7 +263,7 @@ def identify():
                 r = s.read();
                 b = b + r
         res = [c for c in b]
-        if(len(res) == 0):
+        if(len(res) != 12):
                 print "tryagain"
                 return identify()
         if res[8].encode("hex") == '30':
@@ -298,7 +298,7 @@ def delete_id(id):
                 r = s.read();
                 b = b + r
         res = [c for c in b]
-        if(len(res) == 0):
+        if(len(res) != 12):
                 print "tryagain"
                 return delete_id()
         if res[8].encode("hex") == '30':
@@ -321,7 +321,7 @@ def ispressfinger():
                 r = s.read();
                 b = b + r
         res = [c for c in b]
-        if(len(res) == 0):
+        if(len(res) != 12):
                 print "tryagain"
                 return ispressfinger()
         if res[8].encode("hex") == '30':
