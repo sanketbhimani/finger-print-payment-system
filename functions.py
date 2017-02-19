@@ -3,7 +3,7 @@ import serial
 import time
 import itertools
 
-_time = 0.6
+_time = 0.1
 
 s = serial.Serial('/dev/ttyAMA0',9600)
 
@@ -16,6 +16,9 @@ def start():
                 r = s.read();
                 b = b + r
         res = [c for c in b]
+	if(len(res) == 0):
+		print "tryagain"
+		return start()
         if res[8].encode("hex") == '30':
                 print "start sensor Successful :)"
 		return 1
@@ -33,6 +36,9 @@ def start_led():
 		r = s.read();
 		b = b + r
 	res = [c for c in b]
+        if(len(res) == 0):
+                print "tryagain"
+                return start_led()
 	if res[8].encode("hex") == '30':
 		print "start led Successful :)"
 		return 1
@@ -50,6 +56,9 @@ def stop_led():
                 r = s.read();
                 b = b + r
         res = [c for c in b]
+        if(len(res) == 0):
+                print "tryagain"
+                return stop_led()
         if res[8].encode("hex") == '30':
                 print "stop led Successful :)"
 		return 1
@@ -67,6 +76,9 @@ def delete_all_ids():
                 r = s.read();
                 b = b + r
         res = [c for c in b]
+        if(len(res) == 0):
+                print "tryagain"
+                return delete_all_ids()
         if res[8].encode("hex") == '30':
                 print "delete all ids Successful :)"
 		return 1
@@ -85,6 +97,9 @@ def capture_image():
                 r = s.read();
                 b = b + r
 	res = [c for c in b]
+        if(len(res) == 0):
+                print "tryagain"
+                return capture_image()
 	if res[8].encode("hex") == '30':
                 print "capture image Successful :)"
 		return 1
@@ -103,6 +118,9 @@ def current_count():
                 r = s.read();
                 b = b + r
         res = [c for c in b]
+        if(len(res) == 0):
+                print "tryagain"
+                return current_count()
         if res[8].encode("hex") == '30':
 		
                 print "currant count",res[4].encode("hex")
@@ -131,6 +149,9 @@ def start_enroll(id):
                 r = s.read();
                 b = b + r
         res = [c for c in b]
+        if(len(res) == 0):
+                print "tryagain"
+                return start_enroll()
         if res[8].encode("hex") == '30':
 
                 print "start enroll for id ",id
@@ -149,11 +170,14 @@ def enroll1():
         r=""
         b=""
         s.write([0x55,0xAA,0X01,0X00,0X00,0X00,0X00,0X00,0X23,0X00,0X23,0X01])
-        time.sleep(_time*4)
+        time.sleep(_time)
         while s.in_waiting:
                 r = s.read();
                 b = b + r
         res = [c for c in b]
+        if(len(res) == 0):
+                print "tryagain"
+                return enroll1()
         if res[8].encode("hex") == '30':
                 print "Enroll 1 Successful :)"
                 return 1
@@ -175,11 +199,14 @@ def enroll2():
         r=""
         b=""
         s.write([0x55,0xAA,0X01,0X00,0X00,0X00,0X00,0X00,0X24,0X00,0X24,0X01])
-        time.sleep(_time*4)
+        time.sleep(_time)
         while s.in_waiting:
                 r = s.read();
                 b = b + r
         res = [c for c in b]
+        if(len(res) == 0):
+                print "tryagain"
+                return enroll2()
         if res[8].encode("hex") == '30':
                 print "Enroll 2 Successful :)"
                 return 1
@@ -201,17 +228,21 @@ def enroll3():
         r=""
         b=""
         s.write([0x55,0xAA,0X01,0X00,0X00,0X00,0X00,0X00,0X25,0X00,0X25,0X01])
-        time.sleep(_time*4)
+        time.sleep(_time)
         while s.in_waiting:
                 r = s.read();
                 b = b + r
         res = [c for c in b]
+        if(len(res) == 0):
+                print "tryagain"
+                return enroll3()
         if res[8].encode("hex") == '30':
                 print "Enroll 3 Successful :)"
                 return 1
         else:
-                if res[4].encode("hex") == '12':
-                        print "finger not press Enroll 3 Error :("
+                if res[4].encode("hex") != '01':
+                        print "id already exists: ",res[5].encode("hex")
+			print "Enroll 3 Error :("
                         return 2
                 elif res[4].encode("hex") == '0b' or res[4].encode("hex") == '0B':
                         print "invalid enrollment order Enoll 3 Error :("
@@ -221,6 +252,8 @@ def enroll3():
                 return -1
 
 
+#returns id in string format Ex. '06' for 6 count
+#return -2 for does not match any finger
 def identify():
         r=""
         b=""
@@ -230,11 +263,18 @@ def identify():
                 r = s.read();
                 b = b + r
         res = [c for c in b]
+        if(len(res) == 0):
+                print "tryagain"
+                return identify()
         if res[8].encode("hex") == '30':
                 print "Identify id: ", res[4].encode("hex"), res[5].encode("hex")
 		print "Successful :)"
                 return res[4].encode("hex")
         else:
+		
+		if res[4].encode("hex") == '08':
+			print "does not match any finger"
+			return -2
                 print "Identify Error :("
                 print [elem.encode("hex") for elem in res]
                 return -1
@@ -258,6 +298,9 @@ def delete_id(id):
                 r = s.read();
                 b = b + r
         res = [c for c in b]
+        if(len(res) == 0):
+                print "tryagain"
+                return delete_id()
         if res[8].encode("hex") == '30':
 
                 print "delete id ",id
@@ -278,6 +321,9 @@ def ispressfinger():
                 r = s.read();
                 b = b + r
         res = [c for c in b]
+        if(len(res) == 0):
+                print "tryagain"
+                return ispressfinger()
         if res[8].encode("hex") == '30':
                 print "is press finger Successful :)"
 		if res[4].encode("hex") == '00':
@@ -290,6 +336,24 @@ def ispressfinger():
                 print "is press finger Error :("
                 print [elem.encode("hex") for elem in res]
                 return -1
+
+
+#delete_all_ids()
+
+
+start_led()
+start_enroll(current_count())
+capture_image()
+enroll1()
+capture_image()
+enroll2()
+capture_image()
+enroll3()
+
+stop_led()
+
+
+time.sleep(5)
 
 start_led()
 capture_image()
