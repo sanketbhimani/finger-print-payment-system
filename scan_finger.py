@@ -21,6 +21,10 @@ def payment():
         k=keyboard.keyboard_value()
     print ans
     return ans
+<<<<<<< HEAD
+=======
+
+>>>>>>> d6e8e3fba6e2c07c2e81e8459755326583bf3f65
 def mode_select() :
     print "select number"
     print "1)new user"
@@ -66,8 +70,16 @@ def scan_finger():
                             Lprint.lcd_string("successfull scanned:)",LCD_LINE_1)
                             time.sleep(1)
                             Lprint.lcd_string("enter your mobile no",LCD_LINE_1)
+<<<<<<< HEAD
                             for i in range(0,10):
                                 val = keyboard.keyboard_value()
+=======
+                            val1=''
+                            for i in range(0,10):
+                                val = keyboard.keyboard_value()
+                                val1=val1+val
+                                Lprint.lcd_string(val1,LCD_LINE_2)
+>>>>>>> d6e8e3fba6e2c07c2e81e8459755326583bf3f65
                                 num.insert(i,val)
                                 print num[i]
                             Lprint.lcd_string("check message in",LCD_LINE_1)
@@ -83,6 +95,33 @@ def scan_finger():
                             '''
                             while(f.ispressfinger()==1):
                                 time.sleep(0.1)
+<<<<<<< HEAD
+=======
+                        else:
+                            Lprint.lcd_string("enroll 3 fail",LCD_LINE_1)
+                            Lprint.lcd_string("please try again",LCD_LINE_2)
+                            time.sleep(2)
+                    else:
+                        Lprint.lcd_string("3rd capture fail",LCD_LINE_1)
+                        Lprint.lcd_string("please try again",LCD_LINE_2)
+                        time.sleep(2)
+                else:
+                    Lprint.lcd_string("enroll 2 fail",LCD_LINE_1)
+                    Lprint.lcd_string("please try again",LCD_LINE_2)
+                    time.sleep(2)
+            else:
+                 Lprint.lcd_string("2nd capture fail",LCD_LINE_1)
+                 Lprint.lcd_string("please try again",LCD_LINE_2)
+                 time.sleep(2)
+        else:
+            Lprint.lcd_string("enroll 1 fail",LCD_LINE_1)
+            Lprint.lcd_string("please try again",LCD_LINE_2)
+            time.sleep(2)
+    else:
+        Lprint.lcd_string("1st capture fail",LCD_LINE_1)
+        Lprint.lcd_string("please try again",LCD_LINE_2)
+        time.sleep(2)                   
+>>>>>>> d6e8e3fba6e2c07c2e81e8459755326583bf3f65
     f.stop_led()
 
 def verify():
@@ -98,6 +137,7 @@ def verify():
              print 'remove finger'
              Lprint.lcd_byte(0x01, LCD_CMD) 
              Lprint.lcd_string("enter ammount ",LCD_LINE_1)
+<<<<<<< HEAD
              val = keyboard.keyboard_value()
              i=0
              while(val != 'D'):
@@ -106,6 +146,19 @@ def verify():
                  Lprint.lcd_byte(0x01, LCD_CMD) 
                  Lprint.lcd_string("press D ",LCD_LINE_2)
                  val = keyboard.keyboard_value()
+=======
+             val = ''
+             i=0
+             val_string = 'ammount:'
+             Lprint.lcd_string(" then press D ",LCD_LINE_2)
+             while(val != 'D'):
+                 ammount.insert(i,val)
+                 i = i +1
+                 val = keyboard.keyboard_value()
+                 val_string = val_string + val
+                 Lprint.lcd_string(val_string,LCD_LINE_1)
+                 
+>>>>>>> d6e8e3fba6e2c07c2e81e8459755326583bf3f65
              Lprint.lcd_byte(0x01, LCD_CMD) 
              Lprint.lcd_string("sending data... ",LCD_LINE_1)
             
