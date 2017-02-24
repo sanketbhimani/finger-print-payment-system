@@ -119,7 +119,7 @@ def scan_finger():
                                 send Current_id and number
                             '''
 			    
-			    url = "http://malgadi.co.in/web_portal/register_new_user.php?fid="+str(current_id)+"&mobileno="+str(number)
+			    url = "http://malgadi.co.in/touch-n-pay/register_new_user.php?fid="+str(current_id)+"&mobileno="+str(number)
 			    content = urllib2.urlopen(url).read()
 			    if(content == '1'):
                                 Lprint.lcd_string("registered successfully",LCD_LINE_1)
@@ -267,7 +267,7 @@ def verify():
             
              '''
 <<<<<<< HEAD
-	     url = "http://malgadi.co.in/web_portal/do_payment.php?fid="+str(detected_id)+"&cost="+str(ammount)
+	     url = "http://malgadi.co.in/touch-n-pay/do_payment.php?fid="+str(detected_id)+"&cost="+str(ammount)
 	     print 'response from website'
 	     
              content = urllib2.urlopen(url).read()
