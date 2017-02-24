@@ -3,8 +3,7 @@
 	if(isset($_POST['user_id']) && isset($_POST['pass']) && $_POST['user_id'] != "" && $_POST['pass'] != ""){
 		$user_id = mysql_real_escape_string($_POST['user_id']);
 		$pass = mysql_real_escape_string($_POST['pass']);
-		
-		$q = "SELECT * FROM `users` WHERE `mobile_no` = '".$user_id."' AND `password` = '".$pass."'";
+		$q = "SELECT * FROM `users` WHERE `id` = '".$user_id."' AND `password` = '".$pass."'";
 		$f = mysql_query($q);
 		$number = mysql_num_rows($f);
 		if($number > 0){
