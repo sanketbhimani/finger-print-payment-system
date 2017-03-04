@@ -36,6 +36,16 @@ def keyboard_value():
                         pass
                     return value[m][i]
             GPIO.output(row[m],True)
+<<<<<<< HEAD
 #while 1:
  #   k = keyboard_value()
   #  print k
+=======
+<<<<<<< HEAD
+##while 1:
+##    k = keyboard_value()
+##    print k
+=======
+
+>>>>>>> e83d3e93573a883f466bccd4f1a1410d1f72c728
+>>>>>>> 4cea4ae5945e3310c96d77bc52ff75e1da540fac

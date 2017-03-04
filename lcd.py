@@ -170,6 +170,15 @@ def lcd_string(message,line):
  
   for i in range(LCD_WIDTH):
     lcd_byte(ord(message[i]),LCD_CHR)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+ 
+=======
+>>>>>>> e83d3e93573a883f466bccd4f1a1410d1f72c728
+>>>>>>> 4cea4ae5945e3310c96d77bc52ff75e1da540fac
 #decimal to ascii convertor
 def convert(conv):
     if(conv==0):
@@ -221,6 +230,13 @@ def c_d_to_a(num):
     lcd_string(sa,1)    
 
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> d6e8e3fba6e2c07c2e81e8459755326583bf3f65
+>>>>>>> e83d3e93573a883f466bccd4f1a1410d1f72c728
+>>>>>>> 4cea4ae5945e3310c96d77bc52ff75e1da540fac
 ##if __name__ == '__main__':
 ## 
 ##  try:
