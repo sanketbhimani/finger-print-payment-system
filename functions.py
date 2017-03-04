@@ -292,25 +292,25 @@ def enroll3():			#enroll function
 
 #returns id in string format Ex. '06' for 6 count
 #return -2 for does not match any finger
-def identify():
-        r=""
-        b=""
+def identify():  #function for identifyinhg the finger of user
+        r=""	#string for reading data from string
+        b=""	#string for storing the read data
         
-        s.write([0x55,0xAA,0X01,0X00,0X00,0X00,0X00,0X00,0X51,0X00,0X51,0X01])
+        s.write([0x55,0xAA,0X01,0X00,0X00,0X00,0X00,0X00,0X51,0X00,0X51,0X01])	#serial syntax
         time.sleep(_time)
         
-        while s.in_waiting:
-                r = s.read();
-                b = b + r
+        while s.in_waiting:		#waiting untill serial output is not recived
+                r = s.read();		#reading serial data
+                b = b + r		#storing serial data
         res = [c for c in b]
-        if(len(res) != 12):
+        if(len(res) != 12):		#varify if obtain output has 12 character or not
                 print "tryagain"
-                return identify()
-        if res[8].encode("hex") == '30':
+                return identify()	#call the function again if there is error
+        if res[8].encode("hex") == '30':	#'30' indicates successfull execution of command
                 print "Identify id: ", res[4].encode("hex"), res[5].encode("hex")
 		print "Successful :)"
                 return res[4].encode("hex")
-        elif res[8].encode("hex") == '31':
+        elif res[8].encode("hex") == '31': #'31' indicates unsuccessfull executin of command 
 		
 		if res[4].encode("hex") == '08':
 			print "does not match any finger"
@@ -321,13 +321,10 @@ def identify():
         else:
                 print [elem.encode("hex") for elem in res]
                 return identify()
-
-
-
 #accepts id in hex
-def delete_id(id):
-        r=""
-        b=""
+def delete_id(id):	#function for delete id of user
+        r=""		#string for reading data from string
+        b=""		#string for storing the read data
         
         cmd = [0x55,0xAA,0X01,0X00,0x00,0X00,0X00,0X00,0X40,0X00,0X40,0X01]
         cmd[4] = int(id,16)
@@ -339,19 +336,19 @@ def delete_id(id):
         s.write(cmd)
         time.sleep(_time)
         
-        while s.in_waiting:
-                r = s.read();
-                b = b + r
+        while s.in_waiting:		#varify if obtain output has 12 character or not
+                r = s.read();		#reading serial data
+                b = b + r		#storing serial data
         res = [c for c in b]
-        if(len(res) != 12):
+        if(len(res) != 12):		#varify if obtain output has 12 character or not
 #                print "tryagain"
-                return delete_id(id)
-        if res[8].encode("hex") == '30':
+                return delete_id(id)	#call the function again if there is error
+        if res[8].encode("hex") == '30':	#'30' indicates successfull execution of command
 
                 print "delete id ",id
                 print "Successful :)"
                 return 1
-        elif res[8].encode("hex") == '31':
+        elif res[8].encode("hex") == '31':	#'31' indicates unsuccessfull execution of command
                 print "delete id ",id
 		print "Error :("
                 print [elem.encode("hex") for elem in res]
@@ -359,21 +356,21 @@ def delete_id(id):
         else:
                 return delete_id(id)
 
-def ispressfinger():
-        r=""
-        b=""
+def ispressfinger():		#function for delete id of user
+        r=""			#string for reading data
+        b=""			#string for storing data
         
-        s.write([0x55,0xAA,0X01,0X00,0X00,0X00,0X00,0X00,0X26,0X00,0X26,0X01])
+        s.write([0x55,0xAA,0X01,0X00,0X00,0X00,0X00,0X00,0X26,0X00,0X26,0X01]) #serial syntax
         time.sleep(_time)
         
-        while s.in_waiting:
-                r = s.read();
-                b = b + r
+        while s.in_waiting:	#varify if obtain output has 12 character or not
+                r = s.read();	#reading serial data
+                b = b + r	#storing serial data
         res = [c for c in b]
-        if(len(res) != 12):
+        if(len(res) != 12):	#varify if obtain output has 12 character or not
 #                print "tryagain"
-                return ispressfinger()
-        if res[8].encode("hex") == '30':
+                return ispressfinger()	#call the function again if there is error
+        if res[8].encode("hex") == '30':	#'30' indicates successfull execution of command
 #                print "is press finger Successful :)"
 		if res[4].encode("hex") == '00':
 #			print "finger press"
@@ -381,7 +378,7 @@ def ispressfinger():
 		else:
 #			print "finger not press"
 			return 2
-        elif res[8].encode("hex") == '31':
+        elif res[8].encode("hex") == '31':	#'31' indicates successfull execution of command
                 print "is press finger Error :("
                 print [elem.encode("hex") for elem in res]
                 return -1
