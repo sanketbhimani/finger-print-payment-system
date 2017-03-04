@@ -5,96 +5,96 @@ import itertools
 
 _time = 0.1
 
-s = serial.Serial('/dev/ttyAMA0',9600)
+s = serial.Serial('/dev/ttyAMA0',9600)    #syntax for serial communication
 
-def start():
-	r=""
-	b=""
-	s.write([0x55,0xAA,0X01,0X00,0X00,0X00,0X00,0X00,0X01,0X00,0X01,0X01])
+def start():			#initialization function for starting finger print sensor
+	r=""			#string for reading the serial data
+	b=""			#string for storing all the read serial data
+	s.write([0x55,0xAA,0X01,0X00,0X00,0X00,0X00,0X00,0X01,0X00,0X01,0X01])  #serial syntax for starting the sensor
 	time.sleep(_time)
-        while s.in_waiting:
-                r = s.read();
-                b = b + r
+        while s.in_waiting:			#wait untill serial data is recived
+                r = s.read();			#reading serial data
+                b = b + r			#storing the data
         res = [c for c in b]
-	if(len(res) != 12):
-#		print "tryagain"
-		return start()
-        if res[8].encode("hex") == '30':
+	if(len(res) != 12):			#varify if string of 12 character is recived in ouyput	
+		
+		return start()                  #if proper response is not available then send the data again
+        if res[8].encode("hex") == '30':	#'30' indicates function is excecuted successfully by the sensor
                 print "start sensor Successful :)"
 		return 1
-        elif res[8].encode("hex") == '31':
+        elif res[8].encode("hex") == '31':	#'31' indicates function is not successfully executed by the sensor
                 print "start sensor Error :("
                 print [elem.encode("hex") for elem in res]
 		return -1
 	else:
                 return start()
 
-def start_led():
-	r=""
-	b=""
+def start_led():		#initialization function for starting the C-mos led of finger print sensor
+	r=""			#string for reading the serial data
+	b=""			#string for storing all the read serial data
 	
-	s.write([0x55,0xAA,0X01,0X00,0X01,0X00,0X00,0X00,0X12,0X00,0X13,0X01])
+	s.write([0x55,0xAA,0X01,0X00,0X01,0X00,0X00,0X00,0X12,0X00,0X13,0X01])	 #serial syntax 
 	time.sleep(_time)
-	while s.in_waiting:
-		r = s.read();
-		b = b + r
+	while s.in_waiting:		#varify if string of 12 character is recived in ouyput	
+		r = s.read();		#reading serial data
+		b = b + r		#storing the data
 	res = [c for c in b]
-        if(len(res) != 12):
+        if(len(res) != 12):		#varify if string of 12 character is recived in ouyput	
  #               print "tryagain"
-                return start_led()
-	if res[8].encode("hex") == '30':
+                return start_led()	#proper response is not available then send the data again
+	if res[8].encode("hex") == '30':	#'30' indicates function is excecuted successfully by the sensor
 		print "start led Successful :)"
 		return 1
-	elif res[8].encode("hex") == '31':
+	elif res[8].encode("hex") == '31':	#'31' indicates function is not successfully executed by the sensor
 		print "start led Error :("
 		print [elem.encode("hex") for elem in res]
 		return -1
 	else:
                 return start_led()
 
-def stop_led():
-        r=""
-        b=""
+def stop_led():		#initialization function for stop led
+        r=""		#string for reading the serial data
+        b=""		#string for storing all the read serial data
         
-        s.write([0x55,0xAA,0X01,0X00,0X00,0X00,0X00,0X00,0X12,0X00,0X12,0X01])
+        s.write([0x55,0xAA,0X01,0X00,0X00,0X00,0X00,0X00,0X12,0X00,0X12,0X01])		#serial syntax	
         time.sleep(_time)
         
-        while s.in_waiting:
-                r = s.read();
-                b = b + r
+        while s.in_waiting:			#varify if string of 12 character is recived in ouyput	
+                r = s.read();			#reading serial data
+                b = b + r			#storing the data
         res = [c for c in b]
-        if(len(res) != 12):
+        if(len(res) != 12):			#varify if string of 12 character is recived in ouyput
 #                print "tryagain"
-                return stop_led()
-        if res[8].encode("hex") == '30':
+                return stop_led()		#proper response is not available then send the data again
+        if res[8].encode("hex") == '30':	#'30' indicates function is excecuted successfully by the sensor
                 print "stop led Successful :)"
 		return 1
-        elif res[8].encode("hex") == '31':
+        elif res[8].encode("hex") == '31':	#'31' indicates function is not successfully executed by the sensor
                 print "stop led Error :("
                 print [elem.encode("hex") for elem in res]
 		return -1
 	else:
                 return stop_led()
 
-def delete_all_ids():
-	r=""
- 	b=""
+def delete_all_ids():		#initialization function for stop led
+	r=""			#string for reading the serial data
+ 	b=""			#string for storing all the read serial data
  	
-	s.write([0x55,0xAA,0X01,0X00,0X00,0X00,0X00,0X00,0X41,0X00,0X41,0X01])
+	s.write([0x55,0xAA,0X01,0X00,0X00,0X00,0X00,0X00,0X41,0X00,0X41,0X01])		#serial syntax	
         time.sleep(_time)
         
         time.sleep(3)
-        while s.in_waiting:
-                r = s.read();
-                b = b + r
+        while s.in_waiting:		#varify if string of 12 character is recived in ouyput	
+                r = s.read();		#reading serial data
+                b = b + r		#storing the data
         res = [c for c in b]
-        if(len(res)!= 12):
+        if(len(res)!= 12):		#varify if string of 12 character is recived in ouyput
 #                print "try again"
-                return delete_all_ids()
-        if res[8].encode("hex") == '30':
+                return delete_all_ids()		#proper response is not available then send the data again
+        if res[8].encode("hex") == '30':	#'30' indicates function is excecuted successfully by the sensor
                 print "delete all ids Successful :)"
 		return 1
-        elif res[8].encode("hex") == '31':
+        elif res[8].encode("hex") == '31':	#'31' indicates function is not successfully executed by the sensor
                 print "delete all ids Error :("
                 print [elem.encode("hex") for elem in res]
 		return -1
@@ -102,24 +102,24 @@ def delete_all_ids():
                 return delete_all_ids()
 
 
-def capture_image():
-        r=""
-        b=""
+def capture_image():		#initialization function for stop led
+        r=""			#string for reading the serial data
+        b=""			#string for storing all the read serial data
         
-	s.write([0x55,0xAA,0X01,0X00,0X00,0X00,0X00,0X00,0X60,0X00,0X60,0X01])
+	s.write([0x55,0xAA,0X01,0X00,0X00,0X00,0X00,0X00,0X60,0X00,0X60,0X01])		#serial syntax
         time.sleep(_time)
         
-        while s.in_waiting:
-                r = s.read();
-                b = b + r
+        while s.in_waiting:		#varify if string of 12 character is recived in ouyput
+                r = s.read();		#reading serial data
+                b = b + r		#storing the data
 	res = [c for c in b]
-        if(len(res) != 12):
+        if(len(res) != 12):		#varify if string of 12 character is recived in ouyput
 #                print "tryagain"
-                return capture_image()
-	if res[8].encode("hex") == '30':
+                return capture_image()	#proper response is not available then send the data again
+	if res[8].encode("hex") == '30':	#'30' indicates function is excecuted successfully by the sensor
                 print "capture image Successful :)"
 		return 1
-        elif res[8].encode("hex") == '31':
+        elif res[8].encode("hex") == '31':	#'31' indicates function is not successfully executed by the sensor
                 print "capture image Error :("
                 print [elem.encode("hex") for elem in res]
 		return -1
@@ -127,26 +127,26 @@ def capture_image():
                 return capture_image()
 
 #returns count in string format Ex. '06' for 6 count
-def current_count():
-	r=""
-        b=""
+def current_count():		#initialization function for stop led
+	r=""			#string for reading the serial data
+        b=""			#string for storing all the read serial data
         
-        s.write([0x55,0xAA,0X01,0X00,0X00,0X00,0X00,0X00,0X20,0X00,0X20,0X01])
+        s.write([0x55,0xAA,0X01,0X00,0X00,0X00,0X00,0X00,0X20,0X00,0X20,0X01])		#serial syntax
         time.sleep(_time)
         
-        while s.in_waiting:
-                r = s.read();
-                b = b + r
+        while s.in_waiting:		#varify if string of 12 character is recived in ouyput
+                r = s.read();		#reading serial data
+                b = b + r		#storing the data
         res = [c for c in b]
-        if(len(res) != 12):
+        if(len(res) != 12):		#varify if string of 12 character is recived in ouyput
 #                print "tryagain"
-                return current_count()
-        if res[8].encode("hex") == '30':
+                return current_count()		#proper response is not available then send the data again
+        if res[8].encode("hex") == '30':	#'30' indicates function is excecuted successfully by the sensor
 		
                 print "currant count",res[4].encode("hex")
 		print "Successful :)"
                 return res[4].encode("hex")
-        elif res[8].encode("hex") == '31':
+        elif res[8].encode("hex") == '31':	#'31' indicates function is not successfully executed by the sensor
                 print "currant count Error :("
                 print [elem.encode("hex") for elem in res]
                 return -1
@@ -155,11 +155,11 @@ def current_count():
 
 
 #accepts id in string format Ex '06'  for 6 id
-def start_enroll(id):
-        r=""
-        b=""
+def start_enroll(id):		#initialization function for stop led
+        r=""			#string for reading the serial data
+        b=""			#string for storing all the read serial data
         
-	cmd = [0x55,0xAA,0X01,0X00,0x00,0X00,0X00,0X00,0X22,0X00,0X22,0X01]
+	cmd = [0x55,0xAA,0X01,0X00,0x00,0X00,0X00,0X00,0X22,0X00,0X22,0X01]		
 	cmd[4] = int(id,16)
 	chk_sum = int('0x55',16) + int('0xAA',16) + int('0x01',16) + int('0x22',16) + int('0x'+id,16)
 	high = int(hex(chk_sum >> 8),16)
@@ -169,20 +169,20 @@ def start_enroll(id):
         s.write(cmd)
         time.sleep(_time)
         
-        while s.in_waiting:
+        while s.in_waiting:	#varify if string of 12 character is recived in ouyput
                 r = s.read();
                 b = b + r
         res = [c for c in b]
-        if(len(res) != 12):
-#                print "tryagain"
+        if(len(res) != 12):		#proper response is not available then send the data again
+#                print "tryagain"	#'30' indicates function is excecuted successfully by the sensor
                 return start_enroll(id)
         if res[8].encode("hex") == '30':
 
                 print "start enroll for id ",id
                 print "Successful :)"
                 return 1
-        elif res[8].encode("hex") == '31':
-                print "start enroll for id ",id
+        elif res[8].encode("hex") == '31':	#'31' indicates function is not successfully executed by the sensor
+                print "start enroll for id "
 		print "Error :("
                 print [elem.encode("hex") for elem in res]
                 return -1
@@ -192,24 +192,24 @@ def start_enroll(id):
 #return 1 for successfull
 #return 2 for finger not pressed
 #return 3 for invalid order
-def enroll1():
-        r=""
-        b=""
+def enroll1():			#initialization function for stop led
+        r=""			#string for reading the serial data
+        b=""			#string for storing all the read serial data
         
-        s.write([0x55,0xAA,0X01,0X00,0X00,0X00,0X00,0X00,0X23,0X00,0X23,0X01])
+        s.write([0x55,0xAA,0X01,0X00,0X00,0X00,0X00,0X00,0X23,0X00,0X23,0X01])  
         time.sleep(_time)
         
         while s.in_waiting:
                 r = s.read();
                 b = b + r
         res = [c for c in b]
-        if(len(res) != 12):
+        if(len(res) != 12):		#varify if string of 12 character is recived in ouyput
                 print "tryagain"
                 return enroll1()
-        if res[8].encode("hex") == '30':
+        if res[8].encode("hex") == '30':		#'30' indicates function is excecuted successfully by the sensor	
                 print "Enroll 1 Successful :)"
                 return 1
-        elif res[8].encode("hex") == '31':
+        elif res[8].encode("hex") == '31':		#'31' indicates function is not successfully executed by the sensor
 		if res[4].encode("hex") == '12':
 			print "finger not press Enroll 1  Error :("
 			return 0
