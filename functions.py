@@ -7,7 +7,7 @@ _time = 0.1
 
 s = serial.Serial('/dev/ttyAMA0',9600)    #syntax for serial communication
 
-def start():			#initialization function for starting finger print sensor
+def start():			# function for starting finger print sensor
 	r=""			#string for reading the serial data
 	b=""			#string for storing all the read serial data
 	s.write([0x55,0xAA,0X01,0X00,0X00,0X00,0X00,0X00,0X01,0X00,0X01,0X01])  #serial syntax for starting the sensor
@@ -29,7 +29,7 @@ def start():			#initialization function for starting finger print sensor
 	else:
                 return start()
 
-def start_led():		#initialization function for starting the C-mos led of finger print sensor
+def start_led():		# function for starting the C-mos led of finger print sensor
 	r=""			#string for reading the serial data
 	b=""			#string for storing all the read serial data
 	
@@ -52,7 +52,7 @@ def start_led():		#initialization function for starting the C-mos led of finger 
 	else:
                 return start_led()
 
-def stop_led():		#initialization function for stop led
+def stop_led():		#function for stop led
         r=""		#string for reading the serial data
         b=""		#string for storing all the read serial data
         
@@ -76,7 +76,7 @@ def stop_led():		#initialization function for stop led
 	else:
                 return stop_led()
 
-def delete_all_ids():		#initialization function for stop led
+def delete_all_ids():		# function for DELETE_ALL_IDS()
 	r=""			#string for reading the serial data
  	b=""			#string for storing all the read serial data
  	
@@ -102,7 +102,7 @@ def delete_all_ids():		#initialization function for stop led
                 return delete_all_ids()
 
 
-def capture_image():		#initialization function for stop led
+def capture_image():		# function for capture_image
         r=""			#string for reading the serial data
         b=""			#string for storing all the read serial data
         
@@ -127,7 +127,7 @@ def capture_image():		#initialization function for stop led
                 return capture_image()
 
 #returns count in string format Ex. '06' for 6 count
-def current_count():		#initialization function for stop led
+def current_count():		# function for current_count
 	r=""			#string for reading the serial data
         b=""			#string for storing all the read serial data
         
@@ -155,7 +155,7 @@ def current_count():		#initialization function for stop led
 
 
 #accepts id in string format Ex '06'  for 6 id
-def start_enroll(id):		#initialization function for stop led
+def start_enroll(id):		# function for start_enroll
         r=""			#string for reading the serial data
         b=""			#string for storing all the read serial data
         
@@ -192,7 +192,7 @@ def start_enroll(id):		#initialization function for stop led
 #return 1 for successfull
 #return 2 for finger not pressed
 #return 3 for invalid order
-def enroll1():			#initialization function for stop led
+def enroll1():			# function for enrolling finger print
         r=""			#string for reading the serial data
         b=""			#string for storing all the read serial data
         
@@ -222,12 +222,10 @@ def enroll1():			#initialization function for stop led
         else:
                 return enroll1()
 
-#return 1 for successfull
-#return 2 for finger not pressed
-#return 3 for invalid order
-def enroll2():
-        r=""
-        b=""
+
+def enroll2():		# function for enrolling second finger-print
+        r=""		#string for reading the serial data
+        b=""		#string for storing all the read serial data
         
         s.write([0x55,0xAA,0X01,0X00,0X00,0X00,0X00,0X00,0X24,0X00,0X24,0X01])
         time.sleep(_time)
@@ -236,13 +234,13 @@ def enroll2():
                 r = s.read();
                 b = b + r
         res = [c for c in b]
-        if(len(res) != 12):
+        if(len(res) != 12):			#varify if string of 12 character is recived in ouyput
                 print "tryagain"
                 return enroll2()
-        if res[8].encode("hex") == '30':
+        if res[8].encode("hex") == '30':	#'30' indicates function is excecuted successfully by the sensor
                 print "Enroll 2 Successful :)"
                 return 1
-        elif res[8].encode("hex") == '31':
+        elif res[8].encode("hex") == '31':	#'31' indicates function is not successfully executed by the sensor
                 if res[4].encode("hex") == '12':
                         print "finger not press Enroll 2 Error :("
                         return 0
@@ -258,24 +256,24 @@ def enroll2():
 #return 1 for successfull
 #return 2 for finger not pressed
 #return 3 for invalid order
-def enroll3():
-        r=""
-        b=""
+def enroll3():			#enroll function
+        r=""			#string for storing the read serial data
+        b=""			#string for storing the read serial data
         
-        s.write([0x55,0xAA,0X01,0X00,0X00,0X00,0X00,0X00,0X25,0X00,0X25,0X01])
+        s.write([0x55,0xAA,0X01,0X00,0X00,0X00,0X00,0X00,0X25,0X00,0X25,0X01]) #serial syntax
         time.sleep(_time)
         
-        while s.in_waiting:
-                r = s.read();
-                b = b + r
+        while s.in_waiting:		#wait untill output is recived to controller
+                r = s.read();		#reading the data
+                b = b + r		#storing the data
         res = [c for c in b]
-        if(len(res) != 12):
+        if(len(res) != 12):		#varify if 12 bits are recived in string
                 print "tryagain"
-                return enroll3()
-        if res[8].encode("hex") == '30':
+                return enroll3()	#call function again if proper string is not recived
+        if res[8].encode("hex") == '30':	#'30' indicates program has executed successfully by finger print sensor
                 print "Enroll 3 Successful :)"
                 return 1
-        elif res[8].encode("hex") == '31':
+        elif res[8].encode("hex") == '31':	#'31' indicates if function is not executed successfully by finger print sensor 
                 if res[5].encode("hex") == '00':
                         print "id already exists: ",res[5].encode("hex")
                         print [elem.encode("hex") for elem in res]
