@@ -7,6 +7,16 @@ _time = 0.1
 
 s = serial.Serial('/dev/ttyAMA0',9600)    #syntax for serial communication
 
+
+'''
+function name: start()
+#input:no input
+#output:acknowldge from the sensor for successfull execution
+#logic:sending the byte array of 12 bytes through UART to the sensor and decoding the data from the sensor according
+to data sheet
+#example call:functions.start()
+'''
+
 def start():			# function for starting finger print sensor
 	r=""			#string for reading the serial data
 	b=""			#string for storing all the read serial data
@@ -29,6 +39,16 @@ def start():			# function for starting finger print sensor
 	else:
                 return start()
 
+'''
+function name: start_led()
+#input:no input
+#output:acknowldge from the sensor for successfull execution
+#logic:sending the byte array of 12 bytes through UART to the sensor and decoding the data from the sensor according
+to data sheet
+#example call:functions.start_led()
+'''	
+	
+	
 def start_led():		# function for starting the C-mos led of finger print sensor
 	r=""			#string for reading the serial data
 	b=""			#string for storing all the read serial data
@@ -52,6 +72,17 @@ def start_led():		# function for starting the C-mos led of finger print sensor
 	else:
                 return start_led()
 
+
+	
+	
+'''
+function name: stop_led()
+#input:no input
+#output:acknowldge from the sensor for successfull execution
+#logic:sending the byte array of 12 bytes through UART to the sensor and decoding the data from the sensor according
+to data sheet
+#example call:functions.stop_led()
+'''
 def stop_led():		#function for stop led
         r=""		#string for reading the serial data
         b=""		#string for storing all the read serial data
@@ -76,6 +107,14 @@ def stop_led():		#function for stop led
 	else:
                 return stop_led()
 
+'''
+function name: delete_all_ids()
+#input:no input
+#output:acknowldge from the sensor for successfull execution
+#logic:sending the byte array of 12 bytes through UART to the sensor and decoding the data from the sensor according
+to data sheet
+#example call:functions.delete_all_ids()
+'''
 def delete_all_ids():		# function for DELETE_ALL_IDS()
 	r=""			#string for reading the serial data
  	b=""			#string for storing all the read serial data
@@ -101,7 +140,14 @@ def delete_all_ids():		# function for DELETE_ALL_IDS()
 	else:
                 return delete_all_ids()
 
-
+'''
+function name: capture_image()
+#input:no input
+#output:acknowldge from the sensor for successfull execution
+#logic:sending the byte array of 12 bytes through UART to the sensor and decoding the data from the sensor according
+to data sheet
+#example call:functions.capture_image()
+'''
 def capture_image():		# function for capture_image
         r=""			#string for reading the serial data
         b=""			#string for storing all the read serial data
@@ -125,7 +171,13 @@ def capture_image():		# function for capture_image
 		return -1
 	else:
                 return capture_image()
-
+'''
+function name: current_count()
+#input:no input
+#output:acknowldge from the sensor for successfull execution and also total number of enrollment performed on the sensor
+#logic:sending the byte array of 12 bytes through UART to the sensor and deccoding if there is any error in recived data
+#example call:functions.current_count()
+'''
 #returns count in string format Ex. '06' for 6 count
 def current_count():		# function for current_count
 	r=""			#string for reading the serial data
@@ -153,7 +205,14 @@ def current_count():		# function for current_count
         else:
                 return current_count()
 
-
+'''
+function name: start_enroll()
+#input:the id at which enrollment will be performed
+#output:acknowldge from the sensor for successfull execution
+#logic:sending the byte array of 12 bytes through UART to the sensor and decoding the data from the sensor according
+to data sheet
+#example call:functions.start_enroll(34)
+'''
 #accepts id in string format Ex '06'  for 6 id
 def start_enroll(id):		# function for start_enroll
         r=""			#string for reading the serial data
@@ -189,9 +248,14 @@ def start_enroll(id):		# function for start_enroll
         else:
                 return start_enroll(id)
 
-#return 1 for successfull
-#return 2 for finger not pressed
-#return 3 for invalid order
+'''
+function name: enroll1()
+#input:no input
+#output:acknowldge from the sensor for successfull execution
+#logic:sending the byte array of 12 bytes through UART to the sensor and decoding the data from the sensor according
+to data sheet
+#example call:functions.enroll1()
+'''
 def enroll1():			# function for enrolling finger print
         r=""			#string for reading the serial data
         b=""			#string for storing all the read serial data
@@ -222,7 +286,14 @@ def enroll1():			# function for enrolling finger print
         else:
                 return enroll1()
 
-
+'''
+function name: enroll2()
+#input:no input
+#output:acknowldge from the sensor for successfull execution
+#logic:sending the byte array of 12 bytes through UART to the sensor and decoding the data from the sensor according
+to data sheet
+#example call:functions.enroll2()
+'''
 def enroll2():		# function for enrolling second finger-print
         r=""		#string for reading the serial data
         b=""		#string for storing all the read serial data
@@ -253,9 +324,14 @@ def enroll2():		# function for enrolling second finger-print
         else:
                 return enroll2()
 
-#return 1 for successfull
-#return 2 for finger not pressed
-#return 3 for invalid order
+'''
+function name: enroll3()
+#input:no input
+#output:acknowldge from the sensor for successfull execution
+#logic:sending the byte array of 12 bytes through UART to the sensor and decoding the data from the sensor according
+to data sheet
+#example call:functions.enroll3()
+'''
 def enroll3():			#enroll function
         r=""			#string for storing the read serial data
         b=""			#string for storing the read serial data
@@ -290,8 +366,14 @@ def enroll3():			#enroll function
                 return enroll3()
 
 
-#returns id in string format Ex. '06' for 6 count
-#return -2 for does not match any finger
+'''
+function name: identify()
+#input:no input
+#output:acknowldge from the sensor for successfull execution
+#logic:sending the byte array of 12 bytes through UART to the sensor and decoding the data from the sensor according
+to data sheet
+#example call:functions.identify()
+'''
 def identify():  #function for identifyinhg the finger of user
         r=""	#string for reading data from string
         b=""	#string for storing the read data
@@ -321,7 +403,14 @@ def identify():  #function for identifyinhg the finger of user
         else:
                 print [elem.encode("hex") for elem in res]
                 return identify()
-#accepts id in hex
+'''
+function name: delete_id()
+#input:no input
+#output:acknowldge from the sensor for successfull execution
+#logic:sending the byte array of 12 bytes through UART to the sensor and decoding the data from the sensor according
+to data sheet
+#example call:functions.delete_id()
+'''
 def delete_id(id):	#function for delete id of user
         r=""		#string for reading data from string
         b=""		#string for storing the read data
@@ -355,7 +444,14 @@ def delete_id(id):	#function for delete id of user
                 return -1
         else:
                 return delete_id(id)
-
+'''
+function name: start()
+#input:no input
+#output:acknowldge from the sensor for successfull execution
+#logic:sending the byte array of 12 bytes through UART to the sensor and decoding the data from the sensor according
+to data sheet
+#example call:functions.start()
+'''
 def ispressfinger():		#function for delete id of user
         r=""			#string for reading data
         b=""			#string for storing data
