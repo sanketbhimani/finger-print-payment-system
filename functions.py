@@ -405,11 +405,11 @@ def identify():  #function for identifyinhg the finger of user
                 return identify()
 '''
 function name: delete_id()
-#input:no input
+#input:input id which you want to delete
 #output:acknowldge from the sensor for successfull execution
 #logic:sending the byte array of 12 bytes through UART to the sensor and decoding the data from the sensor according
 to data sheet
-#example call:functions.delete_id()
+#example call:functions.delete_id(4)
 '''
 def delete_id(id):	#function for delete id of user
         r=""		#string for reading data from string
@@ -445,12 +445,12 @@ def delete_id(id):	#function for delete id of user
         else:
                 return delete_id(id)
 '''
-function name: start()
+function name: ispressfinger()
 #input:no input
-#output:acknowldge from the sensor for successfull execution
+#output:acknowldge from the sensor for successfull execution and also reponse if finger is pressed or not
 #logic:sending the byte array of 12 bytes through UART to the sensor and decoding the data from the sensor according
 to data sheet
-#example call:functions.start()
+#example call:functions.ispressfinger()
 '''
 def ispressfinger():		#function for delete id of user
         r=""			#string for reading data
@@ -482,21 +482,4 @@ def ispressfinger():		#function for delete id of user
                 return ispressfinger()
 
 
-####
-####start()
-####start_led()
-##delete_all_ids()
-####capture_image()
-####identify()
-##start()
-##start_led()
-##start_enroll('01')
-###delete_all_ids()
-##capture_image()
-##enroll1()
-##capture_image()
-##enroll2()
-##capture_image()
-##enroll3()
-##stop_led()
-##current_count()
+
