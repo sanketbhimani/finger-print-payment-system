@@ -1,5 +1,16 @@
-import struct
-import serial
+'''
+* Project Name: 	e-Money transfer using fingertip through IOT device
+* Author List:	 	Sanket Bhimani, Keyur Rakholiya , Earnest vekariya
+* Filename: 		functions.py 
+* Functions: 		start() , start_led() ,stop_led() , delete_all_ids() ,capture_image() ,current_count() ,start_enroll() ,
+			enroll1() ,enroll2() ,enroll3() ,identify() , delete_id() ,ispressfinger()
+* Global Variables:	No global variables.
+'''
+
+
+
+import struct			#improting python structure library
+import serial			#importing serial library
 import time
 import itertools
 
@@ -464,15 +475,11 @@ def ispressfinger():		#function for delete id of user
                 b = b + r	#storing serial data
         res = [c for c in b]
         if(len(res) != 12):	#varify if obtain output has 12 character or not
-#                print "tryagain"
                 return ispressfinger()	#call the function again if there is error
         if res[8].encode("hex") == '30':	#'30' indicates successfull execution of command
-#                print "is press finger Successful :)"
 		if res[4].encode("hex") == '00':
-#			print "finger press"
 			return 1
 		else:
-#			print "finger not press"
 			return 2
         elif res[8].encode("hex") == '31':	#'31' indicates successfull execution of command
                 print "is press finger Error :("
