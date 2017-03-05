@@ -1,19 +1,14 @@
-<<<<<<< HEAD
-#final code
-=======
->>>>>>> 4cea4ae5945e3310c96d77bc52ff75e1da540fac
 import urllib2
 import functions as f
 import time
 import keyboard
 import time
-<<<<<<< HEAD
 import lcd as Lprint
 import pygame
 
-=======
+
 import lcd as Lprint 
->>>>>>> 4cea4ae5945e3310c96d77bc52ff75e1da540fac
+
 LCD_LINE_1 = 0x80 # LCD RAM address for the 1st line
 LCD_LINE_2 = 0xC0 # LCD RAM address for the 2nd line
 LCD_WIDTH = 16    # Maximum characters per line
@@ -46,13 +41,11 @@ def mode_select() :
 def scan_finger():
     f.start()
     f.start_led()
-<<<<<<< HEAD
-    current_id = int(f.current_count(),16)
-=======
+
 
     current_id = int(f.current_count(),16)
 
->>>>>>> 4cea4ae5945e3310c96d77bc52ff75e1da540fac
+
     f.start_enroll(f.current_count())
     Lprint.lcd_byte(0x01, LCD_CMD)  #clear lcd
     Lprint.lcd_string("put your finger",LCD_LINE_1)
@@ -85,10 +78,7 @@ def scan_finger():
                             Lprint.lcd_string("successfull scanned:)",LCD_LINE_1)
                             time.sleep(1)
                             Lprint.lcd_string("enter your mobile no",LCD_LINE_1)
-<<<<<<< HEAD
-=======
 
->>>>>>> 4cea4ae5945e3310c96d77bc52ff75e1da540fac
                             val1=''
                             val = ''
                             number = 0
@@ -109,10 +99,7 @@ def scan_finger():
                                     number=number*10+temp
                                     Lprint.lcd_string(val1,LCD_LINE_1)
                             
-##                            temp1=Lprint.c_d_to_a(number)
-##                            temp1="number is:"+temp1
-##                            Lprint.lcd_string(temp1,LCD_LINE_2)
-##                            time.sleep(2)
+
                             Lprint.lcd_byte(0x01, LCD_CMD)
                             Lprint.lcd_string("thank you..",LCD_LINE_1)
                             time.sleep(1)
@@ -137,8 +124,7 @@ def scan_finger():
                             
                             while(f.ispressfinger()==1):
                                 time.sleep(0.1)
-<<<<<<< HEAD
-=======
+
 
                             for i in range(0,10):
                                 val = keyboard.keyboard_value()
@@ -165,7 +151,7 @@ def scan_finger():
                             while(f.ispressfinger()==1):
                                 time.sleep(0.1)
 
->>>>>>> 4cea4ae5945e3310c96d77bc52ff75e1da540fac
+
                         else:
                             Lprint.lcd_string("enroll 3 fail",LCD_LINE_1)
                             Lprint.lcd_string("please try again",LCD_LINE_2)
@@ -190,10 +176,7 @@ def scan_finger():
         Lprint.lcd_string("1st capture fail",LCD_LINE_1)
         Lprint.lcd_string("please try again",LCD_LINE_2)
         time.sleep(2)                   
-<<<<<<< HEAD
-=======
 
->>>>>>> 4cea4ae5945e3310c96d77bc52ff75e1da540fac
     f.stop_led()
 
 def verify():
@@ -232,9 +215,7 @@ def verify():
                      ammount=ammount*10+temp
                      Lprint.lcd_string(val1,LCD_LINE_1)
 
-<<<<<<< HEAD
-                 
-=======
+
         detectedid = f.identify()
         if(detectedid != 785):
              print 'remove finger'
@@ -261,7 +242,7 @@ def verify():
                  val_string = val_string + val
                  Lprint.lcd_string(val_string,LCD_LINE_1)
 
->>>>>>> 4cea4ae5945e3310c96d77bc52ff75e1da540fac
+
              Lprint.lcd_byte(0x01, LCD_CMD) 
              Lprint.lcd_string("sending data... ",LCD_LINE_1)
             
@@ -286,10 +267,7 @@ def verify():
                  Lprint.lcd_string("insufficent",LCD_LINE_1)
                  Lprint.lcd_string("balance",LCD_LINE_2)
                  time.sleep(1.5)
-<<<<<<< HEAD
 
-=======
->>>>>>> 4cea4ae5945e3310c96d77bc52ff75e1da540fac
         else:
             Lprint.lcd_byte(0x01, LCD_CMD) 
             Lprint.lcd_string("user not found",LCD_LINE_1)
@@ -319,16 +297,8 @@ def main():
             Lprint.lcd_string("database updated..",LCD_LINE_1)
             time.sleep(2)
             
-<<<<<<< HEAD
-#f.delete_all_ids()
-#pygame.mixer.init()
-=======
-        
->>>>>>> 4cea4ae5945e3310c96d77bc52ff75e1da540fac
+
 Lprint.lcd_init()    
 main()
 
-#f.delete_all_ids()
-#scan_finger()
-#f.current_count()
-#verify()
+
