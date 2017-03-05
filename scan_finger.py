@@ -106,7 +106,7 @@ def scan_finger():
                             print 'remove finger 3'
                             Lprint.lcd_string("successfull scanned:)",LCD_LINE_1)	 #syntax for printing on lcd screen
                             time.sleep(1)
-                            Lprint.lcd_string("enter your mobile no",LCD_LINE_1)
+                            Lprint.lcd_string("enter your mobile no",LCD_LINE_1)	#syntax for printing on lcd screen
 
                             val1=''
                             val = ''
@@ -114,18 +114,18 @@ def scan_finger():
 
                             while (val != 'D'):
                                 Lprint.lcd_string("then Press D ",LCD_LINE_2)	 #syntax for printing on lcd screen
-                                val = keyboard.keyboard_value()
+                                val = keyboard.keyboard_value()		#calling the function to read the key pressed by the user on keypad
                                 time.sleep(0.05)
                                 val1=val1+val
-                                if(val == 'C'):
+                                if(val == 'C'):		#cancel command
                                     val1 = ''
                                     val = ''
                                     number = 0
                                     Lprint.lcd_string("enter again",LCD_LINE_1)	 #syntax for printing on lcd screen
                                     time.sleep(1.5)
-                                elif(val != 'D'):
+                                elif(val != 'D'):	#varify end of mobile numer
                                     temp=int(val)
-                                    number=number*10+temp
+                                    number=number*10+temp	#store the number in variable
                                     Lprint.lcd_string(val1,LCD_LINE_1)
                             
 
@@ -142,7 +142,7 @@ def scan_finger():
                             '''
 			    
 			    url = "http://malgadi.co.in/touch-n-pay/register_new_user.php?fid="+str(current_id)+"&mobileno="+str(number)
-			    content = urllib2.urlopen(url).read()
+			    content = urllib2.urlopen(url).read()	#syntax to update the web server
 			    if(content == '1'):
                                 Lprint.lcd_string("registered successfully",LCD_LINE_1)	 #syntax for printing on lcd screen
                                 time.sleep(2)
@@ -151,17 +151,17 @@ def scan_finger():
 
 
                             
-                            while(f.ispressfinger()==1):
+                            while(f.ispressfinger()==1):	#syntax if finger id pressed or not
                                 time.sleep(0.1)
 
 
-                            for i in range(0,10):
+                            for i in range(0,10):	# to store 10 digit mobile number
                                 val = keyboard.keyboard_value()
 
                             val1=''
                             for i in range(0,10):
                                 val = keyboard.keyboard_value()
-                                val1=val1+val
+                                val1=val1+val	#to store number in string
                                 Lprint.lcd_string(val1,LCD_LINE_2)
 
                                 num.insert(i,val)
@@ -182,28 +182,28 @@ def scan_finger():
 
 
                         else:
-                            Lprint.lcd_string("enroll 3 fail",LCD_LINE_1)	 #syntax for printing on lcd screen
+                            Lprint.lcd_string("enroll 3 fail",LCD_LINE_1)	 #syntax for printing error message on lcd screen
                             Lprint.lcd_string("please try again",LCD_LINE_2)	 #syntax for printing on lcd screen
                             time.sleep(2)
                     else:
-                        Lprint.lcd_string("3rd capture fail",LCD_LINE_1)	 #syntax for printing on lcd screen
+                        Lprint.lcd_string("3rd capture fail",LCD_LINE_1)	 #syntax for printing error message on lcd screen
                         Lprint.lcd_string("please try again",LCD_LINE_2)	 #syntax for printing on lcd screen
                         time.sleep(2)
                 else:
-                    Lprint.lcd_string("enroll 2 fail",LCD_LINE_1)	 #syntax for printing on lcd screen
+                    Lprint.lcd_string("enroll 2 fail",LCD_LINE_1)	 #syntax for printing error message on lcd screen
                     Lprint.lcd_string("please try again",LCD_LINE_2)	 #syntax for printing on lcd screen
                     time.sleep(2)
             else:
-                 Lprint.lcd_string("2nd capture fail",LCD_LINE_1)	 #syntax for printing on lcd screen
-                 Lprint.lcd_string("please try again",LCD_LINE_2)	 #syntax for printing on lcd screen
+                 Lprint.lcd_string("2nd capture fail",LCD_LINE_1)	 #syntax for printing error message on lcd screen
+                 Lprint.lcd_string("please try again",LCD_LINE_2)	 #syntax for printing error message on lcd screen
                  time.sleep(2)
         else:
-            Lprint.lcd_string("enroll 1 fail",LCD_LINE_1)	 #syntax for printing on lcd screen
-            Lprint.lcd_string("please try again",LCD_LINE_2)	 #syntax for printing on lcd screen
+            Lprint.lcd_string("enroll 1 fail",LCD_LINE_1)	 #syntax for printing error message on lcd screen
+            Lprint.lcd_string("please try again",LCD_LINE_2)	 #syntax for printing error message on lcd screen
             time.sleep(2)
     else:
-        Lprint.lcd_string("1st capture fail",LCD_LINE_1)	 #syntax for printing on lcd screen
-        Lprint.lcd_string("please try again",LCD_LINE_2)	 #syntax for printing on lcd screen
+        Lprint.lcd_string("1st capture fail",LCD_LINE_1)	 #syntax for printing error message on lcd screen
+        Lprint.lcd_string("please try again",LCD_LINE_2)	 #syntax for printing error message on lcd screen
         time.sleep(2)                   
 
     f.stop_led()
@@ -221,11 +221,11 @@ def verify():
     print 'press finger'
     Lprint.lcd_byte(0x01, LCD_CMD) 	
     Lprint.lcd_string("press finger..",LCD_LINE_1)	 #syntax for printing on lcd screen
-    while(f.ispressfinger()==2):
+    while(f.ispressfinger()==2):	#varify if finger is pressed or not
         time.sleep(0.1)
-    if(f.capture_image() == 1):
+    if(f.capture_image() == 1):		#varify if image is captured successfully
 
-        detected_id = f.identify()
+        detected_id = f.identify()	#to store the id of the user
         
         if(detected_id != 785):
              detected_id = int(detected_id,16)
