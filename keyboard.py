@@ -3,6 +3,16 @@
 import RPi.GPIO as GPIO
 import time
 
+
+'''
+function name:keyboard_value()
+input: no input
+output:return the value of press switch on keypad by user
+logic:identify the row and column selected by the press switch on keypad
+function call:keyboard.keyboard_value()
+'''
+
+
 def keyboard_value():           #function for reading keyboard input
     GPIO.setmode(GPIO.BCM)      #initialize board as bcm
     GPIO.setwarnings(False)
@@ -27,7 +37,6 @@ def keyboard_value():           #function for reading keyboard input
     while(True):            #loop will execute untill it finds which row and column are selected by press key
         
         for m in range(4):
-##            time.sleep(0.05)
             GPIO.output(row[m],False)
             for i in range(4):
                 if GPIO.input(col[i]) == 0:
@@ -36,16 +45,3 @@ def keyboard_value():           #function for reading keyboard input
                         pass
                     return value[m][i]      #return the press key value
             GPIO.output(row[m],True)
-<<<<<<< HEAD
-#while 1:
- #   k = keyboard_value()
-  #  print k
-=======
-<<<<<<< HEAD
-##while 1:
-##    k = keyboard_value()
-##    print k
-=======
-
->>>>>>> e83d3e93573a883f466bccd4f1a1410d1f72c728
->>>>>>> 4cea4ae5945e3310c96d77bc52ff75e1da540fac
