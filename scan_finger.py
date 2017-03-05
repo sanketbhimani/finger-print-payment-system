@@ -227,33 +227,33 @@ def verify():
 
         detected_id = f.identify()	#to store the id of the user
         
-        if(detected_id != 785):
+        if(detected_id != 785):			#syntax if proper id is obtained
              detected_id = int(detected_id,16)
-             print 'remove finger'
+             print 'remove finger'		
              Lprint.lcd_byte(0x01, LCD_CMD) 
              Lprint.lcd_string("enter ammount ",LCD_LINE_1)	 #syntax for printing on lcd screen
              val = ''
              val1 = 'ammount'
              ammount = 0
              while(val != 'D'):
-                 val = keyboard.keyboard_value()
+                 val = keyboard.keyboard_value()  #function for reading the switch press by the user in keypad
                  time.sleep(0.05)
-                 val1=val1+val
+                 val1=val1+val     		#storing the amount in string
                  Lprint.lcd_string("Press D ",LCD_LINE_2)	 #syntax for printing on lcd screen
-                 if(val == 'c'):
+                 if(val == 'c'):        #varify cancel command
                      val = ''
-                     val1 = 'ammount'
+                     val1 = 'ammount'    
                      ammount = 0
                      Lprint.lcd_string("enter again",LCD_LINE_1)	 #syntax for printing on lcd screen
                      time.sleep(1.5)
                      
-                 elif(val != 'D'):
+                 elif(val != 'D'):			#press d for exiting
                      temp=int(val)
-                     ammount=ammount*10+temp
+                     ammount=ammount*10+temp		#store the amount entered by the user in string
                      Lprint.lcd_string(val1,LCD_LINE_1)
 
 
-        detectedid = f.identify()
+        detectedid = f.identify()     #store the id of detected user finger print in the variable
         if(detectedid != 785):
              print 'remove finger'
              Lprint.lcd_byte(0x01, LCD_CMD) 
@@ -277,7 +277,7 @@ def verify():
                  i = i +1
                  val = keyboard.keyboard_value()
                  val_string = val_string + val
-                 Lprint.lcd_string(val_string,LCD_LINE_1)
+                 Lprint.lcd_string(val_string,LCD_LINE_1)   #print the string on lcd
 
 
              Lprint.lcd_byte(0x01, LCD_CMD) 
