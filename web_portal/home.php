@@ -1,10 +1,24 @@
 <?php
-	include("connect.php");
-	session_start();
-	if(!isset($_SESSION['users_id'])){
+
+
+/*
+*
+* Project Name: 	touch-n-pay
+* Author List: 		sanket bhimani, arnest vekariya, keyur rakholiya
+* Filename: 		home.php
+*
+*/
+
+	include("connect.php"); //create connection with database
+	session_start(); //start session
+	
+	
+	//check if your is logged in or not, if not redirect to login page
+	if(!isset($_SESSION['users_id'])){ 
 		header("location:index.php");
 		die();
 	}
+	//get user details
 	$q = "SELECT * FROM `users` WHERE `id` = '".$_SESSION['users_id']."'";;
 	$f = mysql_query($q);
 	$a = mysql_fetch_array($f);
@@ -29,7 +43,7 @@
 	?>
 		<nav class="red lighten-1">
 			<div class="nav-wrapper">
-				<center style="position:absolute; margin:auto; left:0; right:0;">
+				<center style="position:absolute; margin:auto; margin-right:10%; left:0; right:0;">
 					<span style="font-size: 2em;">Touch n Pay</span>
 				</center>
 				<ul id="nav" style="margin-right: 3%;" class="right">

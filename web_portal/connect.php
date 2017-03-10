@@ -1,8 +1,21 @@
 <?php
+
+/*
+*
+* Project Name: 	touch-n-pay
+* Author List: 		sanket bhimani, arnest vekariya, keyur rakholiya
+* Filename: 		connect.php
+* Global Variables: host: host of databse, uname: username of database, pass: password of database
+*/
+
+
+
+
+
 $host = "localhost";
 $uname = "root";
-$pass = "";
-
+$pass = "YouCanWin@123";
+//make connection with database
 $dbhandle = mysql_connect($host,$uname,$pass)
   or die("Unable to connect to MySQL");
 

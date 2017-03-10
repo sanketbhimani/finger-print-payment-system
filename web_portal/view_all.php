@@ -1,3 +1,18 @@
+<?php
+
+
+/*
+*
+* Project Name: 	touch-n-pay
+* Author List: 		sanket bhimani, arnest vekariya, keyur rakholiya
+* Filename: 		view_all.php
+*
+*/
+
+
+?>
+
+
 <html>
 <body>
 <table border='1'>
@@ -10,7 +25,8 @@
 <td>finger print id</td>
 </tr>
 <?php
-include("connect.php");
+include("connect.php"); //create connection with database
+	//get details of all users
 $q = "SELECT * FROM `users`";;
 $f = mysql_query($q);
 while($a = mysql_fetch_array($f)){
@@ -31,5 +47,6 @@ while($a = mysql_fetch_array($f)){
 
 ?>
 </table>
+<a href="delete_all_ids.php?sek=bhochu">delete all</a>
 </body>
 </html>

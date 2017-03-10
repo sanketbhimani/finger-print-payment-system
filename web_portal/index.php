@@ -1,11 +1,27 @@
 <?php
-	include("connect.php");
+
+
+
+/*
+*
+* Project Name: 	touch-n-pay
+* Author List: 		sanket bhimani, arnest vekariya, keyur rakholiya
+* Filename: 		index.php
+*
+*/
+
+
+	include("connect.php"); //create connection with database
+	
+	//verify login parameters availability
 	if(isset($_POST['user_id']) && isset($_POST['pass']) && $_POST['user_id'] != "" && $_POST['pass'] != ""){
+		//for security porous, it will remove all special characters
 		$user_id = mysql_real_escape_string($_POST['user_id']);
 		$pass = mysql_real_escape_string($_POST['pass']);
 		$q = "SELECT * FROM `users` WHERE `id` = '".$user_id."' AND `password` = '".$pass."'";
 		$f = mysql_query($q);
 		$number = mysql_num_rows($f);
+		//if successful then redirects to home.php else show error
 		if($number > 0){
 			$a = mysql_fetch_array($f);
 			session_start();
@@ -29,6 +45,7 @@
 	</head>
 	<body>
 	<?php
+	//if error available then display
 		if(isset($_GET['error'])){
 			echo("<script>alert('Invalid username or password');</script>");
 		}
