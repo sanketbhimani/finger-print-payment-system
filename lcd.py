@@ -1,3 +1,19 @@
+'''
+* Project Name: 	e-Money transfer using fingertip through IOT device
+* Author List:	 	Sanket Bhimani, Keyur Rakholiya , Earnest vekariya
+* Filename: 		lcd.py (library file for lcd)
+* Functions: 		payment();mode_select();varify()
+* Global Variables:	No global variables.
+'''
+
+
+
+
+
+
+
+
+
 #!/usr/bin/python
 #--------------------------------------
 #    ___  ___  _ ____
