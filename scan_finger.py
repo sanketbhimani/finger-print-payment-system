@@ -1,3 +1,16 @@
+'''
+* Project Name: 	e-Money transfer using fingertip through IOT device
+* Author List:	 	Sanket Bhimani, Keyur Rakholiya , Earnest vekariya
+* Filename: 		scan_finger.py (main file from which all the function are called)
+* Functions: 		payment();mode_select();varify()
+* Global Variables:	No global variables.
+'''
+
+
+
+
+
+
 import urllib2
 import functions as f
 import time
