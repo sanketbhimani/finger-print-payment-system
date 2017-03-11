@@ -3,7 +3,7 @@
 '''
 * Project Name: 	e-Money transfer using fingertip through IOT device
 * Author List:	 	Sanket Bhimani, Keyur Rakholiya , Earnest vekariya
-* Filename: 		functions.py 
+* Filename: 		keyboard.py
 * Functions: 		keyboard_value()
 * Global Variables:	No global variables.
 '''
